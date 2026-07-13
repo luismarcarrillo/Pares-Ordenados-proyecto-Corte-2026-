@@ -1,5 +1,5 @@
-/* Tipografía y colores base */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* Tipografía académica serif (estilo LaTeX) */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 * {
     margin: 0;
@@ -8,20 +8,35 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: #f8fafc;
+    font-family: 'Crimson Text', Georgia, 'Times New Roman', serif;
+    background: #ffffff;
     color: #1e293b;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    counter-reset: section;
 }
 
-/* Barra de navegación */
+/* Barra de progreso (manejada por JS) */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #2563eb;
+    z-index: 200;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Navegación estilo académico */
 nav {
-    background: #0f172a;
+    background: #0f2b4a; /* azul profundo */
     padding: 0 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 2px solid #3b82f6;
 }
 
 nav ul {
@@ -35,18 +50,20 @@ nav ul {
 nav ul li a {
     display: block;
     padding: 0 20px;
-    color: #94a3b8;
+    color: #cbd5e1;
     text-decoration: none;
     font-weight: 500;
     height: 100%;
     line-height: 56px;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.2s;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
 }
 
 nav ul li a:hover {
-    background: #1e293b;
-    color: #f1f5f9;
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
 }
 
 nav ul li a.active {
@@ -55,53 +72,111 @@ nav ul li a.active {
     font-weight: 600;
 }
 
-/* Contenido principal */
+/* Contenedor principal */
 main {
-    max-width: 900px;
-    margin: 40px auto;
+    max-width: 850px;
+    margin: 50px auto;
     padding: 0 20px;
 }
 
+/* Encabezados con línea decorativa */
 h1 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 700;
-    margin-bottom: 0.5em;
-    color: #0f172a;
+    margin-bottom: 0.6em;
+    color: #0f2b4a;
+    border-bottom: 2px solid #93c5fd;
+    padding-bottom: 0.3em;
+    position: relative;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: #2563eb;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1e3a8a;
+    margin: 1.8em 0 0.6em;
+    border-left: 4px solid #3b82f6;
+    padding-left: 12px;
 }
 
 p {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.3em;
+    text-align: justify;
+    hyphens: auto;
 }
 
-/* Tarjetas para los espacios vacíos */
+/* Tarjetas para contenido futuro (PDFs, slides, notebook) */
 .card-placeholder {
-    background: white;
+    background: #f8fafc;
     border-radius: 12px;
     padding: 40px;
-    border: 2px dashed #cbd5e1;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #3b82f6;
     text-align: center;
     color: #475569;
     margin: 24px 0;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    font-style: italic;
 }
 
 .card-placeholder:hover {
-    border-color: #3b82f6;
+    border-left-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
 }
 
 .card-placeholder .icon {
     font-size: 2.5rem;
     margin-bottom: 12px;
+    font-style: normal;
 }
 
-/* Botón de modo oscuro (opcional, si decides añadirlo) */
-#dark-toggle {
-    margin-left: auto;
-    background: none;
+/* Botón volver arriba (insertado por JS) */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    background: #2563eb;
+    color: white;
     border: none;
-    color: #94a3b8;
-    font-size: 1.2rem;
+    border-radius: 50%;
+    font-size: 1.3rem;
     cursor: pointer;
-    padding: 0 12px;
-    line-height: 56px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Scroll suave para todo el documento */
+html {
+    scroll-behavior: smooth;
 }
