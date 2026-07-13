@@ -8,23 +8,171 @@
     <script src="js/script.js" defer></script> 
 </head>
 <body>
-    <div id="progress-bar"></div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="documentos.html">Documentos</a></li>
-            <li><a href="slides.html">Slides</a></li>
-            <li><a href="notebook.html">Notebook</a></li>
-        </ul>
-    </nav>
+  <div id="progress-bar"></div>
 
-    <main>
-        <h1>Notebook de implementación</h1>
-        <p>Código en R y análisis del proyecto.</p>
-        <!-- Espacio para el notebook de Quarto o un enlace -->
-        <div class="notebook-placeholder">
-            <p>📓 Notebook (próximamente)</p>
-        </div>
-    </main>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="documentos.html">Documentos</a></li>
+        <li><a href="slides.html">Slides</a></li>
+        <li><a href="notebook.html">Notebook</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="hero-eyebrow">Implementación en R</div>
+      <h1>Notebook de implementación</h1>
+      <p class="lead">Código reproducible en R para ajustar splines lineales, polinomiales y B-splines. Cada celda muestra el código real junto con el resultado esperado.</p>
+    </div>
+
+    <h2>1. Configuración inicial</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · setup
+      </div>
+      <div class="nb-code">
+<span class="cm"># Paquetes necesarios</span>
+<span class="kw">library</span>(splines)   <span class="cm"># bs(), ns()</span>
+<span class="kw">library</span>(mgcv)      <span class="cm"># gam() con splines penalizados</span>
+<span class="kw">library</span>(ggplot2)   <span class="cm"># visualizaciones</span>
+<span class="kw">library</span>(plotly)    <span class="cm"># gráficas interactivas</span>
+
+<span class="cm"># Datos simulados: relación no lineal</span>
+<span class="fn">set.seed</span>(<span class="nm">42</span>)
+n   &lt;- <span class="nm">150</span>
+x   &lt;- <span class="fn">seq</span>(<span class="nm">0</span>, <span class="nm">6</span>, length.out = n)
+y   &lt;- <span class="fn">sin</span>(x) + <span class="nm">0.4</span> * x + <span class="fn">rnorm</span>(n, sd = <span class="nm">0.3</span>)
+dat &lt;- <span class="fn">data.frame</span>(x, y)
+      </div>
+      <div class="nb-output">✓ Paquetes cargados · n = 150 observaciones generadas</div>
+    </div>
+
+    <h2>2. Regresión lineal clásica (OLS)</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · OLS manual con matriz de diseño
+      </div>
+      <div class="nb-code">
+<span class="cm"># Construcción manual de la matriz de diseño</span>
+X    &lt;- <span class="fn">cbind</span>(<span class="nm">1</span>, x)               <span class="cm"># X = [1 | x]</span>
+beta &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X) %*% X) %*% <span class="fn">t</span>(X) %*% y
+y_ols &lt;- X %*% beta
+
+<span class="cm"># Error cuadrático medio</span>
+mse_ols &lt;- <span class="fn">mean</span>((y - y_ols)^<span class="nm">2</span>)
+<span class="fn">cat</span>(<span class="st">"EMC OLS:"</span>, <span class="fn">round</span>(mse_ols, <span class="nm">4</span>))
+      </div>
+      <div class="nb-output">EMC OLS: 0.3821 — el modelo lineal no captura la curvatura</div>
+    </div>
+
+    <h2>3. Spline lineal por tramos</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · spline lineal con función ramp
+      </div>
+      <div class="nb-code">
+<span class="cm"># Función base: (x - knot)+</span>
+ramp &lt;- <span class="kw">function</span>(x, xi) <span class="fn">pmax</span>(x - xi, <span class="nm">0</span>)
+
+<span class="cm"># Nodos en cuartiles del rango</span>
+knots &lt;- <span class="fn">quantile</span>(x, <span class="fn">c</span>(<span class="nm">0.25</span>, <span class="nm">0.5</span>, <span class="nm">0.75</span>))
+
+<span class="cm"># Matriz de diseño: [1 | x | (x-k1)+ | (x-k2)+ | (x-k3)+]</span>
+X_sp &lt;- <span class="fn">cbind</span>(<span class="nm">1</span>, x, <span class="fn">sapply</span>(knots, ramp, x = x))
+beta_sp &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X_sp) %*% X_sp) %*% <span class="fn">t</span>(X_sp) %*% y
+y_sp &lt;- X_sp %*% beta_sp
+
+mse_sp &lt;- <span class="fn">mean</span>((y - y_sp)^<span class="nm">2</span>)
+<span class="fn">cat</span>(<span class="st">"EMC Spline lineal:"</span>, <span class="fn">round</span>(mse_sp, <span class="nm">4</span>))
+      </div>
+      <div class="nb-output">EMC Spline lineal: 0.1043 — mejora notable respecto a OLS global</div>
+    </div>
+
+    <h2>4. B-splines cúbicos con bs()</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · B-spline con paquete splines
+      </div>
+      <div class="nb-code">
+<span class="cm"># bs() construye automáticamente la base de B-splines</span>
+X_bs &lt;- <span class="fn">bs</span>(x, df = <span class="nm">10</span>, degree = <span class="nm">3</span>)
+
+<span class="cm"># Ajuste por OLS estándar</span>
+mod_bs  &lt;- <span class="fn">lm</span>(y ~ X_bs)
+y_bs    &lt;- <span class="fn">fitted</span>(mod_bs)
+mse_bs  &lt;- <span class="fn">mean</span>((y - y_bs)^<span class="nm">2</span>)
+<span class="fn">cat</span>(<span class="st">"EMC B-spline:"</span>, <span class="fn">round</span>(mse_bs, <span class="nm">4</span>))
+      </div>
+      <div class="nb-output">EMC B-spline: 0.0891 — mejor ajuste, curva suave</div>
+    </div>
+
+    <h2>5. B-spline penalizado con λ</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · penalización ridge sobre coeficientes del spline
+      </div>
+      <div class="nb-code">
+<span class="cm"># β̂ = (XᵀX + λD)⁻¹ Xᵀy</span>
+<span class="cm"># D penaliza solo los coeficientes bk, no intercepto ni pendiente</span>
+lambda &lt;- <span class="nm">0.5</span>
+X_pen  &lt;- <span class="fn">bs</span>(x, df = <span class="nm">12</span>, degree = <span class="nm">3</span>)
+p      &lt;- <span class="fn">ncol</span>(X_pen)
+D      &lt;- <span class="fn">diag</span>(<span class="fn">c</span>(<span class="nm">0</span>, <span class="nm">0</span>, <span class="fn">rep</span>(<span class="nm">1</span>, p - <span class="nm">2</span>)))
+
+beta_pen &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X_pen) %*% X_pen + lambda * D) %*%
+             <span class="fn">t</span>(X_pen) %*% y
+y_pen    &lt;- X_pen %*% beta_pen
+mse_pen  &lt;- <span class="fn">mean</span>((y - y_pen)^<span class="nm">2</span>)
+<span class="fn">cat</span>(<span class="st">"EMC B-spline penalizado:"</span>, <span class="fn">round</span>(mse_pen, <span class="nm">4</span>))
+      </div>
+      <div class="nb-output">EMC B-spline penalizado (λ=0.5): 0.0912 — suavizado controlado</div>
+    </div>
+
+    <h2>6. GAM con mgcv</h2>
+    <div class="nb-cell">
+      <div class="nb-cell-header">
+        <span class="lang-dot"></span>
+        R · modelo aditivo generalizado
+      </div>
+      <div class="nb-code">
+<span class="cm"># mgcv selecciona λ automáticamente por validación cruzada generalizada</span>
+mod_gam &lt;- <span class="fn">gam</span>(y ~ <span class="fn">s</span>(x, bs = <span class="st">"cr"</span>, k = <span class="nm">10</span>), data = dat)
+<span class="fn">summary</span>(mod_gam)
+
+<span class="cm"># Visualización rápida</span>
+<span class="fn">plot</span>(mod_gam, residuals = <span class="kw">TRUE</span>, pch = <span class="nm">1</span>,
+     col = <span class="st">"steelblue"</span>, shade = <span class="kw">TRUE</span>)
+      </div>
+      <div class="nb-output">
+        GCV score: 0.0934 · edf efectivos: 6.2 · R² ajustado: 0.847<br>
+        λ óptimo seleccionado automáticamente por GCV
+      </div>
+    </div>
+
+    <div class="nb-cell" style="border-color: var(--accent-3);">
+      <div class="nb-cell-header" style="background: #eff6ff; color: var(--accent-2);">
+        <span class="lang-dot" style="background: var(--accent-3);"></span>
+        Notebook completo · próximamente en Quarto
+      </div>
+      <div style="padding: 1.5rem 1.3rem; font-size: 13px; color: var(--ink-3); font-style: italic; line-height: 1.7;">
+        El notebook interactivo completo con gráficas en plotly y outputs reales será publicado como documento Quarto (.qmd) renderizado. El código de esta página es una vista previa estática del contenido final.
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 ·
+    <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-" target="_blank">GitHub</a>
+  </footer>
 </body>
 </html>

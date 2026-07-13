@@ -8,26 +8,67 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <div id="progress-bar"></div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="documentos.html">Documentos</a></li>
-            <li><a href="slides.html">Slides</a></li>
-            <li><a href="notebook.html">Notebook</a></li>
-        </ul>
-    </nav>
+  <div id="progress-bar"></div>
 
-    <main>
-        <h1>Documentos del proyecto</h1>
-        <p>Aquí aparecerán los PDFs del trabajo.</p>
-        <!-- Espacio reservado para insertar los PDFs más adelante -->
-        <div class="pdf-placeholder">
-            <p>📄 Documento principal (próximamente)</p>
-            <!-- Podrás usar un iframe o un enlace como: 
-                 <iframe src="pdfs/mi-documento.pdf" width="100%" height="600px"></iframe>
-            -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="documentos.html">Documentos</a></li>
+        <li><a href="slides.html">Slides</a></li>
+        <li><a href="notebook.html">Notebook</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="hero-eyebrow">Documentos del proyecto</div>
+      <h1>Propuesta y trabajo escrito</h1>
+      <p class="lead">Documentos formales del proyecto en el marco del programa Pares Ordenados 2026. Los PDFs se irán publicando conforme avance el proyecto.</p>
+    </div>
+
+    <h2>Propuesta de investigación</h2>
+    <div class="pdf-card">
+      <div class="pdf-card-header">
+        <div class="pdf-icon">📄</div>
+        <div>
+          <h3>Propuesta del proyecto</h3>
+          <p>Descripción, objetivos y alcance · Pares Ordenados 2026</p>
         </div>
-    </main>
+      </div>
+      <div class="pdf-placeholder">
+        <span>📄</span>
+        Documento en preparación — disponible próximamente
+      </div>
+      <!-- Cuando tengas el PDF descomenta esto y borra el pdf-placeholder:
+      <iframe class="pdf-embed" src="assets/propuesta.pdf"></iframe>
+      -->
+    </div>
+
+    <h2>Trabajo escrito</h2>
+    <div class="pdf-card">
+      <div class="pdf-card-header">
+        <div class="pdf-icon">📘</div>
+        <div>
+          <h3>Splines: una alternativa flexible frente a la rigidez de mínimos cuadrados</h3>
+          <p>Documento principal · Luismar Carrillo Alvarez</p>
+        </div>
+      </div>
+      <div class="pdf-placeholder">
+        <span>📘</span>
+        Documento en preparación — disponible próximamente
+      </div>
+      <!-- Cuando tengas el PDF descomenta esto y borra el pdf-placeholder:
+      <iframe class="pdf-embed" src="assets/trabajo.pdf"></iframe>
+      -->
+    </div>
+  </main>
+
+  <footer>
+    Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 ·
+    <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-" target="_blank">GitHub</a>
+  </footer>
 </body>
 </html>

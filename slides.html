@@ -8,23 +8,329 @@
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <div id="progress-bar"></div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="documentos.html">Documentos</a></li>
-            <li><a href="slides.html">Slides</a></li>
-            <li><a href="notebook.html">Notebook</a></li>
-        </ul>
-    </nav>
+  <div id="progress-bar"></div>
 
-    <main>
-        <h1>Diapositivas</h1>
-        <p>Aquí irá la presentación interactiva o un visor de slides.</p>
-        <!-- Espacio para insertar, por ejemplo, un embed de Google Slides o un PDF -->
-        <div class="slides-placeholder">
-            <p>📊 Slides (próximamente)</p>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="documentos.html">Documentos</a></li>
+        <li><a href="slides.html">Slides</a></li>
+        <li><a href="notebook.html">Notebook</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="hero-eyebrow">Presentación interactiva</div>
+      <h1>De regresión lineal a B‑splines</h1>
+      <p class="lead">Diapositivas interactivas con sliders en tiempo real. Mueve los controles para ver cómo cambia el ajuste al variar ruido, nodos y penalización λ.</p>
+    </div>
+
+    <div class="slide-container">
+
+      <style>
+        .deck { width: 100%; font-family: var(--font-sans); }
+        .slide { display: none; min-height: 480px; padding: 2rem 2.5rem; flex-direction: column; }
+        .slide.active { display: flex; }
+        .slide-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.4rem; }
+        .slide-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-bottom: 0.3rem; line-height: 1.25; }
+        .slide-sub { font-size: 14px; color: var(--ink-3); margin-bottom: 1.2rem; line-height: 1.5; }
+        .chart-wrap { position: relative; width: 100%; height: 260px; flex-shrink: 0; }
+        .controls { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.8rem 2rem; align-items: center; }
+        .ctrl-group { display: flex; align-items: center; gap: 8px; }
+        .ctrl-group label { font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+        .ctrl-group input[type=range] { width: 110px; accent-color: var(--accent-3); }
+        .ctrl-val { font-size: 13px; font-weight: 600; color: var(--accent); min-width: 28px; font-family: var(--font-mono); }
+        .insight { margin-top: 1rem; padding: 0.65rem 1rem; border-left: 2px solid var(--accent-3); background: #eff6ff; border-radius: 0 8px 8px 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+        .insight b { color: var(--accent); font-weight: 600; }
+        .code-block { background: #0f1117; border-radius: 8px; padding: 0.9rem 1.1rem; font-family: var(--font-mono); font-size: 12px; color: #e2e8f0; line-height: 1.75; margin-top: 1rem; overflow-x: auto; border: 1px solid #1e293b; }
+        .kw { color: #c084fc; } .cm { color: #4b5563; } .fn { color: #60a5fa; }
+        .formula { margin: 0.8rem 0; padding: 0.7rem 1.1rem; border-radius: 8px; background: var(--bg-2); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 13px; color: var(--ink); line-height: 1.9; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.8rem; }
+        .card-mini { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1rem; }
+        .card-mini h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+        .card-mini p { font-size: 12px; color: var(--ink-3); line-height: 1.5; margin: 0; text-align: left; }
+        .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-right: 5px; vertical-align: middle; font-family: var(--font-mono); }
+        .badge-blue { background: #dbeafe; color: var(--accent-2); }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-warn  { background: #fef3c7; color: #92400e; }
+        .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .nav-dots { display: flex; gap: 6px; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border-s); transition: background 0.15s; cursor: pointer; }
+        .dot.on { background: var(--accent-3); }
+        .nav-btns { display: flex; gap: 8px; }
+        .nav-btns button { padding: 5px 16px; font-size: 13px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-2); color: var(--ink-2); font-family: var(--font-sans); transition: background 0.15s, border-color 0.15s; }
+        .nav-btns button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+      </style>
+
+      <div style="padding: 2rem 2.5rem 0; border-bottom: 1px solid var(--border);">
+        <div class="deck">
+
+          <!-- SLIDE 0 -->
+          <div class="slide active" id="s0">
+            <div class="slide-label">1 de 5 — motivación</div>
+            <div class="slide-title">¿Por qué una recta no siempre alcanza?</div>
+            <div class="slide-sub">Mueve los controles para ver cómo el modelo lineal falla cuando la relación real no es lineal.</div>
+            <div class="chart-wrap"><canvas id="c0"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <label>Ruido</label>
+                <input type="range" id="noise0" min="0" max="60" value="20" step="1">
+                <span class="ctrl-val" id="noise0v">20</span>
+              </div>
+              <div class="ctrl-group">
+                <label>Curvatura</label>
+                <input type="range" id="curv0" min="0" max="5" value="2" step="1">
+                <span class="ctrl-val" id="curv0v">2</span>
+              </div>
+            </div>
+            <div class="insight" id="ins0"><b>EMC:</b> calculando…</div>
+          </div>
+
+          <!-- SLIDE 1 -->
+          <div class="slide" id="s1">
+            <div class="slide-label">2 de 5 — fundamentos</div>
+            <div class="slide-title">El método de mínimos cuadrados</div>
+            <div class="slide-sub">OLS minimiza la suma de errores al cuadrado. La solución viene de una proyección ortogonal sobre el espacio columna de X.</div>
+            <div class="formula">
+              S(β) = (y − Xβ)ᵀ(y − Xβ)<br>
+              <span style="color:var(--ink-3)">→ dS/dβ = 0 →</span><br>
+              β̂ = (XᵀX)⁻¹ Xᵀy
+            </div>
+            <div class="two-col">
+              <div class="card-mini">
+                <h4><span class="badge badge-warn">OLS</span>Modelo lineal</h4>
+                <p>X = [1, x]. Una sola pendiente para todo el rango. Rápido pero rígido.</p>
+              </div>
+              <div class="card-mini">
+                <h4><span class="badge badge-green">B-spline</span>Modelo flexible</h4>
+                <p>X = bs(x, df=10). La misma fórmula β̂, pero X es mucho más rica.</p>
+              </div>
+            </div>
+            <div class="code-block">
+              <span class="cm"># R — mínimos cuadrados manual</span><br>
+              X &lt;- <span class="fn">cbind</span>(<span class="kw">1</span>, x) &nbsp;<span class="cm"># matriz de diseño</span><br>
+              beta &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X) %*% X) %*% <span class="fn">t</span>(X) %*% y<br>
+              y_hat &lt;- X %*% beta
+            </div>
+            <div class="insight"><b>Clave:</b> lo que cambia entre OLS y splines es la matriz X, no la mecánica algebraica.</div>
+          </div>
+
+          <!-- SLIDE 2 -->
+          <div class="slide" id="s2">
+            <div class="slide-label">3 de 5 — splines lineales</div>
+            <div class="slide-title">Splines lineales: dividir para vencer</div>
+            <div class="slide-sub">Agrega o quita nodos y observa cómo el modelo adapta su pendiente en cada tramo.</div>
+            <div class="chart-wrap"><canvas id="c2"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <label>Nodos</label>
+                <input type="range" id="knots2" min="1" max="8" value="3" step="1">
+                <span class="ctrl-val" id="knots2v">3</span>
+              </div>
+            </div>
+            <div class="code-block">
+              <span class="cm"># función base del spline lineal</span><br>
+              ramp &lt;- <span class="kw">function</span>(x, xi) <span class="fn">pmax</span>(x - xi, <span class="kw">0</span>)<br>
+              X &lt;- <span class="fn">cbind</span>(<span class="kw">1</span>, x, <span class="fn">sapply</span>(knots, ramp, x = x))<br>
+              beta &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X) %*% X) %*% <span class="fn">t</span>(X) %*% y
+            </div>
+            <div class="insight" id="ins2"><b>EMC:</b> calculando…</div>
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="slide" id="s3">
+            <div class="slide-label">4 de 5 — B-splines</div>
+            <div class="slide-title">B-splines: suavidad + soporte local</div>
+            <div class="slide-sub">λ controla cuánto se penaliza la variación de coeficientes. Mayor λ → más suave pero más sesgado.</div>
+            <div class="chart-wrap"><canvas id="c3"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <label>Nodos internos</label>
+                <input type="range" id="knots3" min="2" max="12" value="6" step="1">
+                <span class="ctrl-val" id="knots3v">6</span>
+              </div>
+              <div class="ctrl-group">
+                <label>λ penalización</label>
+                <input type="range" id="lambda3" min="0" max="100" value="5" step="1">
+                <span class="ctrl-val" id="lambda3v">5</span>
+              </div>
+            </div>
+            <div class="code-block">
+              <span class="cm"># R — B-spline con penalización ridge</span><br>
+              <span class="kw">library</span>(splines)<br>
+              X &lt;- <span class="fn">bs</span>(x, df = <span class="kw">10</span>, degree = <span class="kw">3</span>)<br>
+              D &lt;- <span class="fn">diag</span>(<span class="fn">c</span>(<span class="kw">0</span>, <span class="kw">0</span>, <span class="fn">rep</span>(<span class="kw">1</span>, <span class="fn">ncol</span>(X)-<span class="kw">2</span>)))<br>
+              beta &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X)%*%X + lambda*D) %*% <span class="fn">t</span>(X) %*% y
+            </div>
+            <div class="insight" id="ins3"><b>EMC:</b> calculando…</div>
+          </div>
+
+          <!-- SLIDE 4 -->
+          <div class="slide" id="s4">
+            <div class="slide-label">5 de 5 — comparación</div>
+            <div class="slide-title">OLS vs. B-splines: el mismo motor, otra matriz X</div>
+            <div class="slide-sub">Los tres modelos usan β̂ = (XᵀX)⁻¹Xᵀy. Lo que los diferencia es cómo construyen X.</div>
+            <div class="chart-wrap"><canvas id="c4"></canvas></div>
+            <div class="two-col" style="margin-top:1rem">
+              <div class="card-mini">
+                <h4><span class="badge badge-warn">OLS</span>Modelo rígido</h4>
+                <p>X = [1, x]. Sesgo alto cuando la relación cambia de tramo.</p>
+              </div>
+              <div class="card-mini">
+                <h4><span class="badge badge-green">B-spline</span>Modelo flexible</h4>
+                <p>X = bs(x, df=10). Soporte local, estabilidad numérica, control con λ.</p>
+              </div>
+            </div>
+            <div class="insight"><b>Conclusión:</b> los B-splines generalizan la matriz de diseño X para ganar flexibilidad sin abandonar la proyección ortogonal.</div>
+          </div>
+
+          <!-- NAV -->
+          <div class="nav-bar">
+            <div class="nav-dots">
+              <div class="dot on" onclick="go(0)"></div>
+              <div class="dot"    onclick="go(1)"></div>
+              <div class="dot"    onclick="go(2)"></div>
+              <div class="dot"    onclick="go(3)"></div>
+              <div class="dot"    onclick="go(4)"></div>
+            </div>
+            <div class="nav-btns">
+              <button onclick="go(cur-1)">← Anterior</button>
+              <button onclick="go(cur+1)">Siguiente →</button>
+            </div>
+          </div>
+
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 ·
+    <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-" target="_blank">GitHub</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    let cur=0;
+    const BLUE='#3b82f6',CORAL='#ef4444',GREEN='#22c55e',GRAY='rgba(100,116,139,0.3)';
+    function seed(s){let x=s;return()=>{x=Math.sin(x)*10000;return x-Math.floor(x);};}
+    const rng=seed(42);
+    function genData(noise=20,curv=2){
+      const xs=[],ys=[];
+      for(let i=0;i<80;i++){
+        const x=i/79*6;
+        xs.push(+x.toFixed(3));
+        ys.push(+(Math.sin(x)+curv*0.2*x+(rng()-0.5)*noise*0.05).toFixed(3));
+      }
+      return{xs,ys};
+    }
+    const{xs:X0,ys:Y0}=genData(20,2);
+    function linReg(xs,ys){
+      const n=xs.length,sx=xs.reduce((a,b)=>a+b,0),sy=ys.reduce((a,b)=>a+b,0);
+      const sxx=xs.reduce((a,b)=>a+b*b,0),sxy=xs.reduce((a,v,i)=>a+v*ys[i],0);
+      const b=(n*sxy-sx*sy)/(n*sxx-sx*sx),a=(sy-b*sx)/n;
+      return xs.map(x=>a+b*x);
+    }
+    function bSplineBasis(xs,knots,deg=3){
+      const ak=[...Array(deg+1).fill(knots[0]),...knots,...Array(deg+1).fill(knots[knots.length-1])];
+      const m=ak.length,nb=m-deg-1;
+      function B(i,d,t){
+        if(d===0)return(t>=ak[i]&&t<ak[i+1])||(t===ak[m-1]&&t>=ak[i]&&t<=ak[i+1])?1:0;
+        const l=(ak[i+d]-ak[i])>0?(t-ak[i])/(ak[i+d]-ak[i])*B(i,d-1,t):0;
+        const r=(ak[i+d+1]-ak[i+1])>0?(ak[i+d+1]-t)/(ak[i+d+1]-ak[i+1])*B(i+1,d-1,t):0;
+        return l+r;
+      }
+      return xs.map(t=>Array.from({length:nb},(_,i)=>B(i,deg,t)));
+    }
+    function matMul(A,B){return A.map((r,i)=>B[0].map((_,j)=>r.reduce((s,_,k)=>s+A[i][k]*B[k][j],0)));}
+    function matVec(A,v){return A.map(r=>r.reduce((s,a,j)=>s+a*v[j],0));}
+    function transpose(A){return A[0].map((_,j)=>A.map(r=>r[j]));}
+    function solveLinear(A,b){
+      const n=b.length,M=A.map((r,i)=>[...r,b[i]]);
+      for(let c=0;c<n;c++){
+        let mx=c;
+        for(let r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[mx][c]))mx=r;
+        [M[c],M[mx]]=[M[mx],M[c]];
+        for(let r=c+1;r<n;r++){const f=M[r][c]/M[c][c];for(let k=c;k<=n;k++)M[r][k]-=f*M[c][k];}
+      }
+      const x=new Array(n).fill(0);
+      for(let i=n-1;i>=0;i--){x[i]=M[i][n];for(let j=i+1;j<n;j++)x[i]-=M[i][j]*x[j];x[i]/=M[i][i];}
+      return x;
+    }
+    function fitSpline(xs,ys,nk,lam=0){
+      const mn=Math.min(...xs),mx=Math.max(...xs);
+      const kp=Array.from({length:nk},(_,i)=>mn+(mx-mn)*(i+1)/(nk+1));
+      const Ph=bSplineBasis(xs,kp,3),PhT=transpose(Ph),p=Ph[0].length;
+      const XTX=matMul(PhT,Ph),XTy=matVec(PhT,ys);
+      const L=XTX.map((r,i)=>r.map((v,j)=>i===j&&i>1?v+lam:v));
+      return xs.map((_,i)=>Ph[i].reduce((s,b,j)=>s+b*solveLinear(L,XTy)[j],0));
+    }
+    function mse(p,a){return+(p.reduce((s,v,i)=>s+(v-a[i])**2,0)/p.length).toFixed(3);}
+    const charts={};
+    function mkChart(id,datasets){
+      if(charts[id])charts[id].destroy();
+      const ctx=document.getElementById(id);
+      if(!ctx)return;
+      charts[id]=new Chart(ctx,{
+        type:'scatter',
+        data:{datasets},
+        options:{
+          responsive:true,maintainAspectRatio:false,animation:false,
+          plugins:{legend:{display:false}},
+          scales:{
+            x:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#94a3b8',font:{size:11}}},
+            y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{color:'#94a3b8',font:{size:11}}}
+          }
+        }
+      });
+    }
+    function sc(xs,ys){return{type:'scatter',data:xs.map((x,i)=>({x,y:ys[i]})),pointRadius:3,pointBackgroundColor:GRAY,pointBorderWidth:0,order:2};}
+    function ln(xs,ys,color,w=2){return{type:'line',data:xs.map((x,i)=>({x,y:ys[i]})),borderColor:color,borderWidth:w,pointRadius:0,fill:false,tension:0.3,order:1};}
+    function buildS0(){
+      const noise=+document.getElementById('noise0').value,curv=+document.getElementById('curv0').value;
+      document.getElementById('noise0v').textContent=noise;
+      document.getElementById('curv0v').textContent=curv;
+      const{xs,ys}=genData(noise,curv),pred=linReg(xs,ys),err=mse(pred,ys);
+      document.getElementById('ins0').innerHTML=`<b>EMC del modelo lineal: ${err}</b> — ${err>0.4?'el modelo no captura la curvatura.':'ajuste razonable para esta curvatura.'}`;
+      mkChart('c0',[sc(xs,ys),ln(xs,pred,CORAL,2.5)]);
+    }
+    function buildS2(){
+      const k=+document.getElementById('knots2').value;
+      document.getElementById('knots2v').textContent=k;
+      const pred=fitSpline(X0,Y0,k,0),err=mse(pred,Y0);
+      document.getElementById('ins2').innerHTML=`<b>EMC con ${k} nodo(s): ${err}</b> — ${k<=2?'subajuste.':k>=7?'riesgo de sobreajuste.':'buen equilibrio.'}`;
+      mkChart('c2',[sc(X0,Y0),ln(X0,pred,BLUE,2.5)]);
+    }
+    function buildS3(){
+      const k=+document.getElementById('knots3').value,lam=+document.getElementById('lambda3').value;
+      document.getElementById('knots3v').textContent=k;
+      document.getElementById('lambda3v').textContent=lam;
+      const pred=fitSpline(X0,Y0,k,lam*0.05),err=mse(pred,Y0);
+      document.getElementById('ins3').innerHTML=`<b>EMC: ${err}</b> — ${lam<3?'λ bajo: posible sobreajuste.':lam>50?'λ alto: modelo muy suavizado.':'λ equilibrado.'}`;
+      mkChart('c3',[sc(X0,Y0),ln(X0,pred,GREEN,2.5)]);
+    }
+    function buildS4(){
+      mkChart('c4',[sc(X0,Y0),ln(X0,linReg(X0,Y0),CORAL,2),ln(X0,fitSpline(X0,Y0,4,0),BLUE,2),ln(X0,fitSpline(X0,Y0,8,0.3),GREEN,2.5)]);
+    }
+    const builders={0:buildS0,2:buildS2,3:buildS3,4:buildS4};
+    function go(n){
+      if(n<0||n>4)return;
+      document.getElementById('s'+cur).classList.remove('active');
+      cur=n;
+      document.getElementById('s'+cur).classList.add('active');
+      document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+      if(builders[cur])builders[cur]();
+    }
+    document.getElementById('noise0').oninput=buildS0;
+    document.getElementById('curv0').oninput=buildS0;
+    document.getElementById('knots2').oninput=buildS2;
+    document.getElementById('knots3').oninput=buildS3;
+    document.getElementById('lambda3').oninput=buildS3;
+    buildS0();
+  </script>
 </body>
 </html>

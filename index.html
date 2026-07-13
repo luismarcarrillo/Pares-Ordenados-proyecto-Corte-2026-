@@ -10,18 +10,115 @@
 <body>
     <div id="progress-bar"></div>
     <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="documentos.html">Documentos</a></li>
-            <li><a href="slides.html">Slides</a></li>
-            <li><a href="notebook.html">Notebook</a></li>
-        </ul>
+        <div class="nav-inner">
+            <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="documentos.html">Documentos</a></li>
+                <li><a href="slides.html">Slides</a></li>
+                <li><a href="notebook.html">Notebook</a></li>
+            </ul>
+        </div>
     </nav>
 
     <main>
-        <h1>Del modelo lineal global a los B‑splines</h1>
-        <p>Un estudio del método de mínimos cuadrados desde el álgebra lineal.</p>
-        <!-- Aquí puedes agregar más contenido de la página principal -->
+        <div class="hero">
+            <div class="hero-eyebrow">Programa Pares Ordenados · Edición 2026</div>
+            <h1>Del modelo lineal global a los B‑splines</h1>
+            <p class="lead">Un estudio del método de mínimos cuadrados desde el álgebra lineal, y cómo los B-splines lo generalizan mediante funciones base locales para modelar relaciones no lineales.</p>
+            <div class="hero-meta">
+                <span><b>Aprendiz</b> Luismar Carrillo Alvarez</span>
+                <span><b>Mentor</b> Javier Aguilar</span>
+                <span><b>Programa</b> Pares Ordenados</span>
+                <span><b>Año</b> 2026</span>
+            </div>
+        </div>
+
+        <div class="thesis">
+            <div class="thesis-label">Tesis central</div>
+            <p>Los B-splines no reemplazan el método de mínimos cuadrados — lo generalizan. Lo que cambia no es la mecánica algebraica sino la matriz de diseño X.</p>
+            <div class="formula-block">
+                β̂ = (XᵀX)⁻¹ Xᵀy <span class="comment">← misma fórmula siempre</span><br>
+                X = [1, x] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">← OLS clásico (rígido)</span><br>
+                X = bs(x, df=10) &nbsp;<span class="comment">← B-spline (flexible)</span>
+            </div>
+        </div>
+
+        <h2>Secciones del proyecto</h2>
+        <div class="cards">
+            <a class="card" href="documentos.html">
+                <div class="card-icon">📄</div>
+                <h3>Documentos</h3>
+                <p>Propuesta formal y trabajo escrito. Fundamentos teóricos del proyecto.</p>
+                <div class="card-arrow">Ver documentos →</div>
+            </a>
+            <a class="card" href="slides.html">
+                <div class="card-icon">📊</div>
+                <h3>Presentación</h3>
+                <p>Diapositivas interactivas con sliders en tiempo real.</p>
+                <div class="card-arrow">Ver slides →</div>
+            </a>
+            <a class="card" href="notebook.html">
+                <div class="card-icon">💻</div>
+                <h3>Notebook</h3>
+                <p>Implementación en R. Código reproducible de todos los modelos.</p>
+                <div class="card-arrow">Ver notebook →</div>
+            </a>
+        </div>
+
+        <h2>Ruta del proyecto</h2>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                    <h4>Álgebra lineal como base</h4>
+                    <p>Sistemas lineales, transformaciones, subespacios, proyecciones ortogonales.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                    <h4>El problema de mínimos cuadrados</h4>
+                    <p>Formulación matricial, derivación de β̂ = (XᵀX)⁻¹Xᵀy e interpretación geométrica.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                    <h4>Splines: flexibilidad por tramos</h4>
+                    <p>Splines lineales, polinomiales y cúbicos naturales.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                    <h4>B-splines y penalización</h4>
+                    <p>Soporte local, estabilidad numérica y control del sobreajuste con λ.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                    <h4>Implementación en R</h4>
+                    <p>Notebook reproducible con bs(), mgcv y visualizaciones.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tags">
+            <span class="tag">álgebra lineal</span>
+            <span class="tag">mínimos cuadrados</span>
+            <span class="tag">splines</span>
+            <span class="tag">B-splines</span>
+            <span class="tag">penalización</span>
+            <span class="tag">R</span>
+            <span class="tag">regresión no paramétrica</span>
+        </div>
     </main>
+
+    <footer>
+        Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 ·
+        <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-" target="_blank">GitHub</a>
+    </footer>
 </body>
 </html>
