@@ -363,7 +363,7 @@ p {
 .pdf-placeholder span { font-size: 2rem; }
 .pdf-embed {
   width: 100%;
-  height: 600px;
+  height: 85vh;
   border: none;
   border-radius: 8px;
 }
