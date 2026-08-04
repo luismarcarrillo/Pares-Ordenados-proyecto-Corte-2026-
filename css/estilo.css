@@ -3,18 +3,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:       #0f1e35;
-  --ink-2:     #334155;
-  --ink-3:     #64748b;
+  --ink:       #16302c;
+  --ink-2:     #3d5652;
+  --ink-3:     #708984;
   --bg:        #ffffff;
-  --bg-2:      #f8fafc;
-  --bg-3:      #f1f5f9;
-  --accent:    #0f2b4a;
-  --accent-2:  #1e4080;
-  --accent-3:  #3b82f6;
-  --accent-4:  #93c5fd;
-  --border:    #e2e8f0;
-  --border-s:  #cbd5e1;
+  --bg-2:      #f5faf8;
+  --bg-3:      #ecf5f1;
+  --accent:    #2f5d62;
+  --accent-2:  #3e7d78;
+  --accent-3:  #6fb3a0;
+  --accent-4:  #bce3d4;
+  --border:    #dde9e4;
+  --border-s:  #c4dad2;
   --radius:    10px;
   --font-serif: 'Source Serif 4', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
@@ -44,7 +44,7 @@ body {
 nav {
   background: var(--accent);
   position: sticky; top: 0; z-index: 100;
-  border-bottom: 1px solid rgba(59,130,246,0.3);
+  border-bottom: 1px solid rgba(111,179,160,0.3);
   box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
 .nav-inner {
@@ -251,13 +251,13 @@ p {
 }
 .card:hover {
   border-color: var(--accent-3);
-  box-shadow: 0 4px 20px rgba(59,130,246,0.1);
+  box-shadow: 0 4px 20px rgba(111,179,160,0.15);
   transform: translateY(-2px);
 }
 .card-icon {
   width: 38px; height: 38px;
   border-radius: 8px;
-  background: #e0eaff;
+  background: #dcf0ea;
   display: flex; align-items: center; justify-content: center;
   font-size: 17px;
 }
@@ -333,7 +333,7 @@ p {
 }
 .pdf-icon {
   width: 44px; height: 44px;
-  background: #fee2e2;
+  background: #e2f3e6;
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; flex-shrink: 0;
@@ -391,7 +391,7 @@ p {
 .nb-cell-header .lang-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #4ade80;
+  background: #7ed9ab;
 }
 .nb-code {
   background: #0f1117;
@@ -441,7 +441,7 @@ p {
   border-radius: 50%;
   font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(15,43,74,0.25);
+  box-shadow: 0 4px 14px rgba(47,93,98,0.25);
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.25s, transform 0.25s;
