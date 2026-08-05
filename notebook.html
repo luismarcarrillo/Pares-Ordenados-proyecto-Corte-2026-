@@ -1,172 +1,434 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notebook – Proyecto Pares Ordenados</title>
-    <link rel="stylesheet" href="css/estilo.css">
-    <script src="js/script.js" defer></script> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Notebook – Proyecto Pares Ordenados</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="notebook_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notebook_files/libs/quarto-html/tabby.min.js"></script>
+<script src="notebook_files/libs/quarto-html/popper.min.js"></script>
+<script src="notebook_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notebook_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notebook_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notebook_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="notebook_files/libs/quarto-html/quarto-html-640605f58ae58ee79329c070719e555b.min.css" rel="stylesheet" append-hash="true" data-mode="light">
+<link href="notebook_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="css/estilo.css">
+<link rel="stylesheet" href="css/quarto-notebook.css">
 </head>
+
 <body>
-  <div id="progress-bar"></div>
 
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="documentos.html">Documentos</a></li>
-        <li><a href="slides.html">Slides</a></li>
-        <li><a href="notebook.html">Notebook</a></li>
-      </ul>
-    </div>
-  </nav>
+<div id="progress-bar"></div>
 
-  <main>
-    <div class="hero">
-      <div class="hero-eyebrow">Implementación en R</div>
-      <h1>Notebook de implementación</h1>
-      <p class="lead">Código reproducible en R para ajustar splines lineales, polinomiales y B-splines. Cada celda muestra el código real junto con el resultado esperado.</p>
-    </div>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Pares Ordenados · <span>2026</span></a>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="documentos.html">Documentos</a></li>
+      <li><a href="slides.html">Slides</a></li>
+      <li><a href="notebook.html" class="active">Notebook</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <h2>1. Configuración inicial</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · setup
-      </div>
-      <div class="nb-code">
-<span class="cm"># Paquetes necesarios</span>
-<span class="kw">library</span>(splines)   <span class="cm"># bs(), ns()</span>
-<span class="kw">library</span>(mgcv)      <span class="cm"># gam() con splines penalizados</span>
-<span class="kw">library</span>(ggplot2)   <span class="cm"># visualizaciones</span>
-<span class="kw">library</span>(plotly)    <span class="cm"># gráficas interactivas</span>
+<main>
+  <div class="hero">
+    <div class="hero-eyebrow">Implementación en Python</div>
+    <h1>Notebook de implementación</h1>
+    <p class="lead">Código reproducible en Python (NumPy, scikit-learn, matplotlib) para ajustar splines lineales, polinomiales y B-splines. Cada celda muestra el código real, ejecutado, junto con su resultado.</p>
+  </div>
 
-<span class="cm"># Datos simulados: relación no lineal</span>
-<span class="fn">set.seed</span>(<span class="nm">42</span>)
-n   &lt;- <span class="nm">150</span>
-x   &lt;- <span class="fn">seq</span>(<span class="nm">0</span>, <span class="nm">6</span>, length.out = n)
-y   &lt;- <span class="fn">sin</span>(x) + <span class="nm">0.4</span> * x + <span class="fn">rnorm</span>(n, sd = <span class="nm">0.3</span>)
-dat &lt;- <span class="fn">data.frame</span>(x, y)
-      </div>
-      <div class="nb-output">✓ Paquetes cargados · n = 150 observaciones generadas</div>
-    </div>
 
-    <h2>2. Regresión lineal clásica (OLS)</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · OLS manual con matriz de diseño
-      </div>
-      <div class="nb-code">
-<span class="cm"># Construcción manual de la matriz de diseño</span>
-X    &lt;- <span class="fn">cbind</span>(<span class="nm">1</span>, x)               <span class="cm"># X = [1 | x]</span>
-beta &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X) %*% X) %*% <span class="fn">t</span>(X) %*% y
-y_ols &lt;- X %*% beta
 
-<span class="cm"># Error cuadrático medio</span>
-mse_ols &lt;- <span class="fn">mean</span>((y - y_ols)^<span class="nm">2</span>)
-<span class="fn">cat</span>(<span class="st">"EMC OLS:"</span>, <span class="fn">round</span>(mse_ols, <span class="nm">4</span>))
-      </div>
-      <div class="nb-output">EMC OLS: 0.3821 — el modelo lineal no captura la curvatura</div>
-    </div>
 
-    <h2>3. Spline lineal por tramos</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · spline lineal con función ramp
-      </div>
-      <div class="nb-code">
-<span class="cm"># Función base: (x - knot)+</span>
-ramp &lt;- <span class="kw">function</span>(x, xi) <span class="fn">pmax</span>(x - xi, <span class="nm">0</span>)
+<h2 id="antes-de-empezar-qué-es-lo-que-realmente-estamos-preguntando" class="anchored">Antes de empezar: ¿qué es lo que realmente estamos preguntando?</h2>
+<p>Antes de escribir una sola línea de código vale la pena detenerse en la pregunta, porque el código sin la pregunta es solo aritmética. Tenemos datos <span class="math inline">(<em>x</em><sub><em>i</em></sub>, <em>y</em><sub><em>i</em></sub>)</span> que provienen de una relación real pero desconocida <span class="math inline"><em>y</em><sub><em>i</em></sub> = <em>f</em>(<em>x</em><sub><em>i</em></sub>) + <em>ε</em><sub><em>i</em></sub></span>. No conocemos <span class="math inline"><em>f</em></span>; solo tenemos sus huellas, contaminadas por ruido. Todo lo que sigue —mínimos cuadrados clásicos, splines lineales, B-splines, penalización, selección automática de <span class="math inline"><em>λ</em></span>— es una misma pregunta hecha de maneras cada vez más flexibles: <strong>¿con qué familia de funciones estoy dispuesto a describir <span class="math inline"><em>f</em></span>, y qué le cuesta a mis datos que yo elija una familia u otra?</strong></p>
+<p>Este notebook no busca “mejorar” mínimos cuadrados —ya vimos en el documento principal que mínimos cuadrados es perfectamente capaz de ajustar relaciones no lineales, siempre que la no linealidad esté en las columnas de la matriz de diseño y no en los parámetros—. Lo que exploramos aquí es <strong>qué pasa cuando dejamos de fijar de antemano la forma global de esas columnas</strong> y las construimos, en cambio, a partir de piezas locales. La aritmética de fondo, <span class="math inline"><em>C</em><sup><em>t</em></sup><em>C</em> <em>ĉ</em> = <em>C</em><sup><em>t</em></sup><em>p</em></span>, no cambia en ningún momento; lo que cambia es quién genera las columnas de <span class="math inline"><em>C</em></span>.</p>
+<div class="callout-intuicion">
+<p><strong>Cómo leer este notebook.</strong> Cada sección sigue el mismo patrón: primero miramos los datos y nos preguntamos qué forma tiene el problema, después escribimos el código que resuelve exactamente esa pregunta, y al final leemos el resultado con calma antes de pasar a la siguiente idea. No hay prisa; el objetivo no es que el código corra, sino que cada línea tenga una razón de ser antes de escribirse.</p>
+<p>Todo el notebook usa solo <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code> y <code>scikit-learn</code> — sin dependencias exóticas— y resuelve las ecuaciones normales explícitamente con <code>numpy.linalg.solve</code>, tal como se hace en el documento principal.</p>
+</div>
+<h2 id="los-datos-una-señal-curva-escondida-en-ruido" class="anchored">1. Los datos: una señal curva escondida en ruido</h2>
+<p>Para poder comparar honestamente varios métodos necesitamos una verdad de referencia. Simulamos entonces una señal <span class="math inline"><em>f</em>(<em>x</em>) = sin (<em>x</em>) + 0.4<em>x</em></span> —una curva suave, con una oscilación y una tendencia lineal superpuesta— y le añadimos ruido gaussiano. La ventaja de simular es que después, cuando midamos el error de cada ajuste, sabremos si estamos midiendo el desempeño del método o simplemente la mala suerte del ruido.</p>
+<div id="setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> SplineTransformer</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos simulados: relación no lineal</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">6</span>, n)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x) <span class="op">+</span> <span class="fl">0.4</span> <span class="op">*</span> x <span class="op">+</span> np.random.normal(scale<span class="op">=</span><span class="fl">0.3</span>, size<span class="op">=</span>n)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: x, <span class="st">"y"</span>: y})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-fig-datos" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(x, y, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"observaciones"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ax.plot(x, np.sin(x) <span class="op">+</span> <span class="fl">0.4</span> <span class="op">*</span> x, color<span class="op">=</span><span class="st">"#7a1f2b"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"f(x) verdadera"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"x"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"y"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Datos simulados"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-datos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="notebook_files/figure-html/fig-datos-output-1.png" width="590" height="413">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: La señal simulada: una curva suave, no un fenómeno errático.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Con <span class="math inline"><em>n</em> = 150</span> observaciones ya podemos ver a simple vista la trampa que le tendemos a un modelo lineal: hay una curvatura genuina, no solo ruido alrededor de una recta.</p>
+<h2 id="el-punto-de-partida-mínimos-cuadrados-con-la-matriz-de-diseño-más-simple" class="anchored">2. El punto de partida: mínimos cuadrados con la matriz de diseño más simple</h2>
+<p>Empezamos por el modelo más honesto y más simple: una recta. La razón para empezar aquí no es que esperemos que funcione bien, sino que la recta es el caso particular que nos deja ver la maquinaria completa —la matriz de diseño <span class="math inline"><em>X</em></span>, las ecuaciones normales, el estimador <span class="math inline"><em>β̂</em></span>— sin que nada más distraiga.</p>
+<div id="ols-manual" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construcción manual de la matriz de diseño</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.column_stack([np.ones(n), x])           <span class="co"># X = [1 | x]</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.linalg.solve(X.T <span class="op">@</span> X, X.T <span class="op">@</span> y)         <span class="co"># ecuaciones normales</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y_ols <span class="op">=</span> X <span class="op">@</span> beta</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mse_ols <span class="op">=</span> np.mean((y <span class="op">-</span> y_ols) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EMC OLS: </span><span class="sc">{</span>mse_ols<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>EMC OLS: 0.2354</code></pre>
+</div>
+</div>
+<p>Fíjense en que no llamamos a ningún <code>LinearRegression()</code> de una librería: escribimos la solución de las ecuaciones normales <span class="math inline"><em>X</em><sup><em>t</em></sup><em>X</em><em>β̂</em> = <em>X</em><sup><em>t</em></sup><em>y</em></span> a mano, exactamente como en el documento principal. Esto es deliberado —quiero que la línea <code>np.linalg.solve(X.T @ X, X.T @ y)</code> quede grabada como la operación que subyace a <em>todo</em> lo que sigue en este notebook, aunque las columnas de <span class="math inline"><em>X</em></span> se vuelvan mucho más interesantes más adelante.</p>
+<p>El error de la recta no es un número que debamos temer: es la medida honesta de cuánto le cuesta a una recta describir una curva. Ese costo es justamente lo que motiva el resto del notebook.</p>
+<h2 id="una-primera-generalización-funciones-rampa-con-nodos" class="anchored">3. Una primera generalización: funciones “rampa” con nodos</h2>
+<p>El modelo lineal falla no porque mínimos cuadrados sea limitado, sino porque le dimos solo dos columnas —una constante y una recta— para describir una curva que necesita más. La idea más simple para darle más flexibilidad sin perder la estructura de mínimos cuadrados es añadir columnas que se “activen” solo a partir de cierto punto: funciones rampa <span class="math inline">(<em>x</em> − <em>ξ</em>)<sub>+</sub> = max (<em>x</em> − <em>ξ</em>, 0)</span>.</p>
+<div id="spline-lineal" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función base: (x - knot)+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ramp(x, xi):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.maximum(x <span class="op">-</span> xi, <span class="dv">0</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Nodos en cuartiles del rango</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>knots <span class="op">=</span> np.quantile(x, [<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de diseño: [1 | x | (x-k1)+ | (x-k2)+ | (x-k3)+]</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>X_sp <span class="op">=</span> np.column_stack([np.ones(n), x] <span class="op">+</span> [ramp(x, k) <span class="cf">for</span> k <span class="kw">in</span> knots])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>beta_sp <span class="op">=</span> np.linalg.solve(X_sp.T <span class="op">@</span> X_sp, X_sp.T <span class="op">@</span> y)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>y_sp <span class="op">=</span> X_sp <span class="op">@</span> beta_sp</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>mse_sp <span class="op">=</span> np.mean((y <span class="op">-</span> y_sp) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EMC Spline lineal: </span><span class="sc">{</span>mse_sp<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>EMC Spline lineal: 0.0855</code></pre>
+</div>
+</div>
+<div class="callout-intuicion">
+<p>Miren con cuidado qué acabamos de hacer: seguimos resolviendo <em>exactamente</em> las mismas ecuaciones normales que en la sección anterior. Lo único que cambió es que <code>X</code> ahora tiene columnas construidas por tramos en lugar de una sola recta global. Esta es la primera vez que vemos, en código y no solo en teoría, que el teorema de invariancia no es un adorno: es literalmente la razón por la que este bloque de código se parece tanto al anterior.</p>
+</div>
+<p>La mejora frente a la recta viene enteramente de darle a la curva permiso para cambiar de pendiente en cada nodo, sin tener que decidir de antemano una fórmula global que la describa.</p>
+<h2 id="de-rampas-a-b-splines-la-misma-idea-mejor-comportada" class="anchored">4. De rampas a B-splines: la misma idea, mejor comportada</h2>
+<p>Las funciones rampa resuelven el problema pero tienen una molestia técnica: no son suaves (tienen un quiebre anguloso en cada nodo) y, sobre todo, las columnas que generan tienden a estar muy correlacionadas entre sí, lo cual hace que <span class="math inline"><em>X</em><sup><em>t</em></sup><em>X</em></span> esté mal condicionada cuando usamos muchos nodos. Los B-splines resuelven ambos problemas a la vez: se construyen con la recursión de Cox-de Boor para que sean suaves hasta cierto orden, y tienen <strong>soporte compacto</strong> —cada función base vive solo en una vecindad de nodos—, lo cual se traduce en que <span class="math inline"><em>X</em><sup><em>t</em></sup><em>X</em></span> es una matriz <em>banda</em>, casi diagonal, en vez de una matriz densa.</p>
+<p>En Python usamos <code>SplineTransformer</code> de <code>scikit-learn</code>, que construye la misma base B-spline que la función <code>bs()</code> de R, a partir de un grado y de un número de nodos interiores colocados en cuantiles de <code>x</code>.</p>
+<div id="bsplines" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SplineTransformer construye automáticamente la base de B-splines</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>degree <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="dv">10</span>                              <span class="co"># grados de libertad de la base</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>n_knots <span class="op">=</span> df <span class="op">-</span> degree <span class="op">+</span> <span class="dv">1</span>            <span class="co"># nodos interiores + 2 de frontera</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>spl <span class="op">=</span> SplineTransformer(degree<span class="op">=</span>degree, n_knots<span class="op">=</span>n_knots,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                         knots<span class="op">=</span><span class="st">"quantile"</span>, include_bias<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>X_bs_raw <span class="op">=</span> spl.fit_transform(x.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste por OLS estándar (misma solución de ecuaciones normales)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>X_bs <span class="op">=</span> np.column_stack([np.ones(n), X_bs_raw])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>beta_bs <span class="op">=</span> np.linalg.solve(X_bs.T <span class="op">@</span> X_bs, X_bs.T <span class="op">@</span> y)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>y_bs <span class="op">=</span> X_bs <span class="op">@</span> beta_bs</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>mse_bs <span class="op">=</span> np.mean((y <span class="op">-</span> y_bs) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EMC B-spline: </span><span class="sc">{</span>mse_bs<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>EMC B-spline: 0.0754</code></pre>
+</div>
+</div>
+<div id="cell-fig-base-bspline" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(X_bs_raw.shape[<span class="dv">1</span>]):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, X_bs_raw[:, j], linewidth<span class="op">=</span><span class="fl">1.3</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"x"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"valor de la base"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Funciones base de B-spline (grado 3)"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-base-bspline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-base-bspline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="notebook_files/figure-html/fig-base-bspline-output-1.png" width="590" height="413">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-base-bspline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: La base de B-splines cúbicos: cada curva vive solo en una vecindad de nodos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>La figura anterior es, quizás, la más importante de todo el notebook: ninguna de esas curvas vive en todo el dominio. Eso es <em>exactamente</em> lo que en el documento principal llamamos soporte compacto, y es la propiedad algebraica —no solo geométrica— que hace que <span class="math inline"><em>X</em><sup><em>t</em></sup><em>X</em></span> sea banda: si dos funciones base no se superponen, la entrada correspondiente de <span class="math inline"><em>X</em><sup><em>t</em></sup><em>X</em></span> es cero.</p>
+<p>De nuevo seguimos ajustando por mínimos cuadrados ordinarios, resolviendo las mismas ecuaciones normales de la sección 2. El error baja respecto al spline lineal, y la curva resultante es visiblemente más suave, sin quiebres angulosos.</p>
+<h2 id="cuando-la-flexibilidad-es-demasiada-penalización" class="anchored">5. Cuando la flexibilidad es demasiada: penalización</h2>
+<p>Con <code>df = 12</code> le damos a la base bastante libertad —tal vez más de la que los datos pueden justificar—. Una manera de controlar ese exceso sin volver a un modelo rígido es penalizar el tamaño de los coeficientes que multiplican a las funciones base más flexibles, dejando intactos el intercepto y el primer coeficiente de la base.</p>
+<div id="bspline-penalizado" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta_hat = (X'X + lambda*D)^-1 X'y</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># D penaliza solo los coeficientes de la base, no el intercepto</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>n_knots2 <span class="op">=</span> df2 <span class="op">-</span> degree <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>spl2 <span class="op">=</span> SplineTransformer(degree<span class="op">=</span>degree, n_knots<span class="op">=</span>n_knots2,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                          knots<span class="op">=</span><span class="st">"quantile"</span>, include_bias<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>X_pen_raw <span class="op">=</span> spl2.fit_transform(x.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X_pen <span class="op">=</span> np.column_stack([np.ones(n), X_pen_raw])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> X_pen.shape[<span class="dv">1</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.diag([<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> (p <span class="op">-</span> <span class="dv">2</span>))</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>beta_pen <span class="op">=</span> np.linalg.solve(X_pen.T <span class="op">@</span> X_pen <span class="op">+</span> lam <span class="op">*</span> D, X_pen.T <span class="op">@</span> y)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>y_pen <span class="op">=</span> X_pen <span class="op">@</span> beta_pen</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>mse_pen <span class="op">=</span> np.mean((y <span class="op">-</span> y_pen) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EMC B-spline penalizado (lambda = </span><span class="sc">{</span>lam<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>mse_pen<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>EMC B-spline penalizado (lambda = 0.5): 0.0760</code></pre>
+</div>
+</div>
+<p>Vale la pena mirar esta línea con la misma atención que la primera del notebook: <code>np.linalg.solve(X_pen.T @ X_pen + lam * D, X_pen.T @ y)</code> es, otra vez, la solución de unas ecuaciones normales —solo que ligeramente perturbadas por <span class="math inline"><em>λ</em><em>D</em></span>. No es una técnica nueva; es la misma álgebra con un término de regularización que castiga la rugosidad excesiva.</p>
+<h2 id="dejando-que-los-datos-elijan-lambda-búsqueda-por-gcv" class="anchored">6. Dejando que los datos elijan <span class="math inline"><em>λ</em></span>: búsqueda por GCV</h2>
+<p>Elegir <span class="math inline"><em>λ</em> = 0.5</span> a mano funciona para un ejemplo, pero no es una estrategia seria en general. Lo que hace <code>mgcv</code> en R —y lo que replicamos aquí con un pequeño barrido manual— es elegir <span class="math inline"><em>λ</em></span> minimizando la validación cruzada generalizada (GCV):</p>
+<p><span class="math display">$$
+\mathrm{GCV}(\lambda) = \frac{n \cdot \mathrm{RSS}(\lambda)}{\left(n - \operatorname{tr} H_\lambda\right)^2},
+\qquad H_\lambda = X_{\text{pen}}\left(X_{\text{pen}}^tX_{\text{pen}} + \lambda D\right)^{-1}X_{\text{pen}}^t
+$$</span></p>
+<p>donde <span class="math inline"><em>H</em><sub><em>λ</em></sub></span> es la matriz “sombrero” que manda <span class="math inline"><em>y</em></span> a <span class="math inline"><em>ŷ</em></span>, y su traza <span class="math inline">tr <em>H</em><sub><em>λ</em></sub></span> hace las veces de “grados de libertad efectivos” del ajuste —exactamente el número <code>edf</code> que reporta <code>mgcv</code>.</p>
+<div id="gcv" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lambdas <span class="op">=</span> np.logspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">40</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gcv_scores <span class="op">=</span> []</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lam_i <span class="kw">in</span> lambdas:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> X_pen.T <span class="op">@</span> X_pen <span class="op">+</span> lam_i <span class="op">*</span> D</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> X_pen <span class="op">@</span> np.linalg.inv(A) <span class="op">@</span> X_pen.T</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    y_hat <span class="op">=</span> H <span class="op">@</span> y</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    rss <span class="op">=</span> np.<span class="bu">sum</span>((y <span class="op">-</span> y_hat) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    tr_H <span class="op">=</span> np.trace(H)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    gcv_scores.append((n <span class="op">*</span> rss) <span class="op">/</span> (n <span class="op">-</span> tr_H) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>gcv_scores <span class="op">=</span> np.array(gcv_scores)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>lambda_opt <span class="op">=</span> lambdas[np.argmin(gcv_scores)]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>A_opt <span class="op">=</span> X_pen.T <span class="op">@</span> X_pen <span class="op">+</span> lambda_opt <span class="op">*</span> D</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>H_opt <span class="op">=</span> X_pen <span class="op">@</span> np.linalg.inv(A_opt) <span class="op">@</span> X_pen.T</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>beta_gam <span class="op">=</span> np.linalg.solve(A_opt, X_pen.T <span class="op">@</span> y)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>y_gam <span class="op">=</span> X_pen <span class="op">@</span> beta_gam</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>mse_gam <span class="op">=</span> np.mean((y <span class="op">-</span> y_gam) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>edf <span class="op">=</span> np.trace(H_opt)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"lambda optimo (GCV): </span><span class="sc">{</span>lambda_opt<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EMC con lambda GCV: </span><span class="sc">{</span>mse_gam<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"grados de libertad efectivos (edf): </span><span class="sc">{</span>edf<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>lambda optimo (GCV): 0.2728
+EMC con lambda GCV: 0.0751
+grados de libertad efectivos (edf): 10.01</code></pre>
+</div>
+</div>
+<div id="cell-fig-gcv" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ax.plot(lambdas, gcv_scores, color<span class="op">=</span><span class="st">"#3a3a8c"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(lambda_opt, color<span class="op">=</span><span class="st">"#7a1f2b"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           label<span class="op">=</span><span class="ss">f"lambda óptimo = </span><span class="sc">{</span>lambda_opt<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">"log"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"lambda (escala log)"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"GCV"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Selección automática de lambda por GCV"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-gcv" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-gcv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="notebook_files/figure-html/fig-gcv-output-1.png" width="598" height="417">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gcv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Puntaje GCV en función de lambda: el mínimo marca el compromiso elegido por los datos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>El número de grados de libertad efectivos (<code>edf</code>) es, en sí mismo, una respuesta a la pregunta con la que abrimos el notebook: la validación cruzada generalizada está diciendo, en el lenguaje de los datos, cuánta flexibilidad <em>necesitó</em> usar el ajuste —ni la máxima que le dimos con <code>df = 12</code>, ni la mínima de una recta.</p>
+<h2 id="mirando-las-cuatro-curvas-juntas" class="anchored">7. Mirando las cuatro curvas juntas</h2>
+<p>Antes de cerrar, vale la pena ver los ajustes superpuestos sobre los mismos datos. La comparación visual dice, de un vistazo, lo que las tablas de error dijeron por separado.</p>
+<div id="cell-fig-comparacion" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(x, y, color<span class="op">=</span><span class="st">"lightgrey"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"observaciones"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y_ols, color<span class="op">=</span><span class="st">"#999999"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"OLS lineal"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y_sp, color<span class="op">=</span><span class="st">"#e6a532"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Spline lineal"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y_bs, color<span class="op">=</span><span class="st">"#2b7a78"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"B-spline"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y_gam, color<span class="op">=</span><span class="st">"#7a1f2b"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"B-spline (lambda GCV)"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"x"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"y"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Comparación de los ajustes"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-comparacion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-comparacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="notebook_files/figure-html/fig-comparacion-output-1.png" width="590" height="414">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Los cuatro modelos ajustados sobre los mismos datos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<h2 id="cierre-una-tabla-y-la-misma-pregunta-de-siempre" class="anchored">8. Cierre: una tabla, y la misma pregunta de siempre</h2>
+<div id="cell-tabla-resumen" class="cell" data-execution_count="11">
+<div id="tabla-resumen" class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="cm"># Nodos en cuartiles del rango</span>
-knots &lt;- <span class="fn">quantile</span>(x, <span class="fn">c</span>(<span class="nm">0.25</span>, <span class="nm">0.5</span>, <span class="nm">0.75</span>))
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="cm"># Matriz de diseño: [1 | x | (x-k1)+ | (x-k2)+ | (x-k3)+]</span>
-X_sp &lt;- <span class="fn">cbind</span>(<span class="nm">1</span>, x, <span class="fn">sapply</span>(knots, ramp, x = x))
-beta_sp &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X_sp) %*% X_sp) %*% <span class="fn">t</span>(X_sp) %*% y
-y_sp &lt;- X_sp %*% beta_sp
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 
-mse_sp &lt;- <span class="fn">mean</span>((y - y_sp)^<span class="nm">2</span>)
-<span class="fn">cat</span>(<span class="st">"EMC Spline lineal:"</span>, <span class="fn">round</span>(mse_sp, <span class="nm">4</span>))
-      </div>
-      <div class="nb-output">EMC Spline lineal: 0.1043 — mejora notable respecto a OLS global</div>
-    </div>
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Modelo</th>
+<th data-quarto-table-cell-role="th">Columnas de la matriz de diseño</th>
+<th data-quarto-table-cell-role="th">EMC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>OLS lineal</td>
+<td>Global: 1, x</td>
+<td>0.2354</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Spline lineal (rampas)</td>
+<td>Local, por tramos: (x-nodo)+</td>
+<td>0.0855</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>B-spline cúbico</td>
+<td>Local, soporte compacto (Cox-de Boor)</td>
+<td>0.0754</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>B-spline penalizado (lambda=0.5)</td>
+<td>Igual, con penalización fija</td>
+<td>0.0760</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>B-spline (lambda por GCV)</td>
+<td>Igual, con penalización elegida por GCV</td>
+<td>0.0751</td>
+</tr>
+</tbody>
+</table>
 
-    <h2>4. B-splines cúbicos con bs()</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · B-spline con paquete splines
-      </div>
-      <div class="nb-code">
-<span class="cm"># bs() construye automáticamente la base de B-splines</span>
-X_bs &lt;- <span class="fn">bs</span>(x, df = <span class="nm">10</span>, degree = <span class="nm">3</span>)
-
-<span class="cm"># Ajuste por OLS estándar</span>
-mod_bs  &lt;- <span class="fn">lm</span>(y ~ X_bs)
-y_bs    &lt;- <span class="fn">fitted</span>(mod_bs)
-mse_bs  &lt;- <span class="fn">mean</span>((y - y_bs)^<span class="nm">2</span>)
-<span class="fn">cat</span>(<span class="st">"EMC B-spline:"</span>, <span class="fn">round</span>(mse_bs, <span class="nm">4</span>))
-      </div>
-      <div class="nb-output">EMC B-spline: 0.0891 — mejor ajuste, curva suave</div>
-    </div>
-
-    <h2>5. B-spline penalizado con λ</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · penalización ridge sobre coeficientes del spline
-      </div>
-      <div class="nb-code">
-<span class="cm"># β̂ = (XᵀX + λD)⁻¹ Xᵀy</span>
-<span class="cm"># D penaliza solo los coeficientes bk, no intercepto ni pendiente</span>
-lambda &lt;- <span class="nm">0.5</span>
-X_pen  &lt;- <span class="fn">bs</span>(x, df = <span class="nm">12</span>, degree = <span class="nm">3</span>)
-p      &lt;- <span class="fn">ncol</span>(X_pen)
-D      &lt;- <span class="fn">diag</span>(<span class="fn">c</span>(<span class="nm">0</span>, <span class="nm">0</span>, <span class="fn">rep</span>(<span class="nm">1</span>, p - <span class="nm">2</span>)))
-
-beta_pen &lt;- <span class="fn">solve</span>(<span class="fn">t</span>(X_pen) %*% X_pen + lambda * D) %*%
-             <span class="fn">t</span>(X_pen) %*% y
-y_pen    &lt;- X_pen %*% beta_pen
-mse_pen  &lt;- <span class="fn">mean</span>((y - y_pen)^<span class="nm">2</span>)
-<span class="fn">cat</span>(<span class="st">"EMC B-spline penalizado:"</span>, <span class="fn">round</span>(mse_pen, <span class="nm">4</span>))
-      </div>
-      <div class="nb-output">EMC B-spline penalizado (λ=0.5): 0.0912 — suavizado controlado</div>
-    </div>
-
-    <h2>6. GAM con mgcv</h2>
-    <div class="nb-cell">
-      <div class="nb-cell-header">
-        <span class="lang-dot"></span>
-        R · modelo aditivo generalizado
-      </div>
-      <div class="nb-code">
-<span class="cm"># mgcv selecciona λ automáticamente por validación cruzada generalizada</span>
-mod_gam &lt;- <span class="fn">gam</span>(y ~ <span class="fn">s</span>(x, bs = <span class="st">"cr"</span>, k = <span class="nm">10</span>), data = dat)
-<span class="fn">summary</span>(mod_gam)
-
-<span class="cm"># Visualización rápida</span>
-<span class="fn">plot</span>(mod_gam, residuals = <span class="kw">TRUE</span>, pch = <span class="nm">1</span>,
-     col = <span class="st">"steelblue"</span>, shade = <span class="kw">TRUE</span>)
-      </div>
-      <div class="nb-output">
-        GCV score: 0.0934 · edf efectivos: 6.2 · R² ajustado: 0.847<br>
-        λ óptimo seleccionado automáticamente por GCV
-      </div>
-    </div>
-
-    <div class="nb-cell" style="border-color: var(--accent-3);">
-      <div class="nb-cell-header" style="background: #eff6ff; color: var(--accent-2);">
-        <span class="lang-dot" style="background: var(--accent-3);"></span>
-        Notebook completo · próximamente en Quarto
-      </div>
-      <div style="padding: 1.5rem 1.3rem; font-size: 13px; color: var(--ink-3); font-style: italic; line-height: 1.7;">
-        El notebook interactivo completo con gráficas en plotly y outputs reales será publicado como documento Quarto (.qmd) renderizado. El código de esta página es una vista previa estática del contenido final.
-      </div>
-    </div>
+</div>
+</div>
+</div>
+<p>Cada fila de esta tabla resuelve el mismo tipo de ecuación normal. Lo que cambia de una fila a otra no es el método de estimación —siempre es mínimos cuadrados, penalizado o no— sino <strong>quién genera las columnas de la matriz de diseño</strong>: una recta global, funciones rampa locales, o B-splines con soporte compacto. Ese es, en una tabla, el argumento completo del documento principal: la potencia de los B-splines no está en superar una limitación de mínimos cuadrados, sino en dar flexibilidad local sin tener que fijar de antemano una forma funcional global.</p>
+<div class="callout-intuicion">
+<p>Si compilaste este notebook y los números de EMC no coinciden dígito a dígito con los de una versión escrita en R, es normal: <code>numpy.random</code> y R usan generadores de números aleatorios distintos, así que la misma semilla (<code>42</code>) produce un ruido ligeramente distinto en cada lenguaje. El orden relativo de los métodos —y el argumento que sostienen— no cambia.</p>
+</div>
+<hr>
+<p><em>Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 · <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-">repositorio en GitHub</a></em></p>
 
   </main>
 
@@ -174,5 +436,412 @@ mod_gam &lt;- <span class="fn">gam</span>(y ~ <span class="fn">s</span>(x, bs = 
     Luismar Carrillo Alvarez · Programa Pares Ordenados 2026 ·
     <a href="https://github.com/luismarcarrillo/Pares-Ordenados-proyecto-Corte-2026-" target="_blank">GitHub</a>
   </footer>
-</body>
-</html>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+
+
+
+
+</body></html>
