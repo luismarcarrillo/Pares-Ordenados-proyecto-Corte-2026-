@@ -6,6 +6,8 @@ format:
     css:
       - css/estilo.css
       - css/quarto-notebook.css
+    include-in-header:
+      text: '<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">'
     toc: false
     embed-resources: false
     include-before-body: partials/notebook-nav.html
