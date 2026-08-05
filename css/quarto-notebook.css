@@ -1,0 +1,100 @@
+/* ──────────────────────────────────────────────────────────────
+   Complemento a css/estilo.css — NO reemplaza nada del archivo
+   original. Solo traduce las clases que genera Quarto (.cell,
+   .sourceCode, .cell-output, ...) a la misma apariencia que ya
+   tienen las celdas escritas a mano en el resto del sitio
+   (.nb-cell, .nb-code, .nb-output en estilo.css).
+   ────────────────────────────────────────────────────────────── */
+
+/* Contenedor de cada celda de código + salida */
+.cell {
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* Bloque de código fuente (fondo oscuro, igual que .nb-code) */
+div.sourceCode {
+  margin: 0;
+  background: #0f1117;
+  border-radius: 0;
+}
+.cell pre.sourceCode,
+.cell div.sourceCode pre {
+  padding: 1.1rem 1.3rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.75;
+  color: #e2e8f0;
+  overflow-x: auto;
+}
+
+/* Resaltado de sintaxis: mismos colores que .nb-code en estilo.css */
+code span.kw { color: #c084fc; }                       /* palabra clave */
+code span.fu { color: #60a5fa; }                        /* función */
+code span.co { color: #4b5563; font-style: italic; }    /* comentario */
+code span.st { color: #86efac; }                        /* string */
+code span.dv, code span.fl, code span.bn { color: #fb923c; } /* números */
+code span.va { color: #e2e8f0; }                        /* variable */
+code span.op { color: #94a3b8; }                        /* operador */
+code span.im { color: #60a5fa; }                         /* import */
+
+/* Salidas de texto (print, stdout) */
+.cell-output-stdout pre,
+.cell-output-stderr pre {
+  background: var(--bg-2);
+  padding: 1rem 1.3rem;
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-3);
+  border-top: 1px solid var(--border);
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+}
+
+/* Salidas gráficas (figuras de matplotlib) y tablas (pandas) */
+.cell-output-display {
+  padding: 1rem 1.3rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+  text-align: center;
+}
+.cell-output-display img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.cell-output-display table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #fff;
+  text-align: left;
+}
+.cell-output-display table th,
+.cell-output-display table td {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+}
+
+/* Recuadros ::: {.callout-intuicion} ... ::: */
+div.callout-intuicion {
+  border-left: 4px solid var(--accent-2);
+  background: var(--bg-2);
+  padding: 0.9rem 1.2rem;
+  margin: 1.4rem 0;
+  border-radius: 6px;
+}
+div.callout-intuicion p:last-child { margin-bottom: 0; }
+
+/* Figuras con pie de foto (fig-cap) */
+figure { margin: 1.5rem 0; text-align: center; }
+figcaption {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-style: italic;
+  margin-top: 0.5rem;
+  text-align: center;
+}
